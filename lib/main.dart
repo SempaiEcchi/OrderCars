@@ -80,13 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       appBar: appBar1,
-      body: ListView.builder(
-        itemBuilder: (context, index) {
+      body: Container(child:Stack(children: <Widget>[
 
-return CarWidget(car: auti[index],);
-        },
-        itemCount: auti.length,
-      
+        TextField(decoration: InputDecoration(
+          labelText: "Search",
+          hintText: "Search",
+          prefixIcon: Icon(Icons.search),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(25.0)))),),
+
+        Padding(
+          padding: const EdgeInsets.only(top:60.0),
+          child: ListView.builder(
+            shrinkWrap: true,
+          itemBuilder: (context, index) {
+
+          return CarWidget(car: auti[index],);
+          },
+          itemCount: auti.length,
+      ),
+        ),
+     ]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: null,
