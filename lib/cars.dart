@@ -57,6 +57,7 @@ class _CarWidgetState extends State<CarWidget> {
               new BoxShadow(
                 color: Colors.grey,
                 blurRadius: 5,
+
               ),
             ]),
             child: Card(
@@ -113,8 +114,8 @@ class _CarWidgetState extends State<CarWidget> {
                           width: 10,
                         ),
                         Expanded(
-                            child: RaisedButton(
-                                elevation: 5,
+                            child: FlatButton(
+
                                 color: Colors.white,
                                 onPressed: () {},
                                 child: Text(
@@ -129,8 +130,7 @@ class _CarWidgetState extends State<CarWidget> {
                           width: 8,
                         ),
                         Expanded(
-                            child: RaisedButton(
-                          elevation: 5,
+                            child: FlatButton(
                           color: Colors.white,
                           onPressed: () {},
                           child: Text(

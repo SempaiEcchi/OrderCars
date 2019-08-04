@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  var visibleSearch=true;
   @override
   Widget build(BuildContext context) {
 
@@ -54,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text(widget.title),
     );
     var auti = CarModels().listOfCars();
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(
@@ -82,15 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: appBar1,
       body: Container(child:Stack(children: <Widget>[
 
-        TextField(decoration: InputDecoration(
-          labelText: "Search",
-          hintText: "Search",
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(25.0)))),),
+        Visibility(
+          visible: !visibleSearch,
+          child: Padding(
+            padding: const EdgeInsets.only(top:18.0,left:8,right: 8),
+            child: Container(
+              decoration: new BoxDecoration (
+                  borderRadius: new BorderRadius.all(new Radius.circular(25.0)),
+              ),
+              child: TextField(decoration: InputDecoration(
+                labelText: "Search",
+                hintText: "Search",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25.0))),),),
+            ),
+          ),
+        ),
 
         Padding(
-          padding: const EdgeInsets.only(top:60.0),
+          padding: visibleSearch?const EdgeInsets.only(top: 4):const EdgeInsets.only(top:70),
           child: ListView.builder(
             shrinkWrap: true,
           itemBuilder: (context, index) {
@@ -103,7 +115,11 @@ class _MyHomePageState extends State<MyHomePage> {
      ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          setState(() {
+            visibleSearch = !visibleSearch;
+          });
+        },
         tooltip: 'Search',
         child: Icon(Icons.search),
       ),

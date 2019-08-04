@@ -11,9 +11,3 @@ import 'package:flutter/material.dart';
     return auti;
   }
 }
-
-
-
-
-
-
