@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ordercars/detailsScreen.dart';
-
 import 'hexcolor.dart';
 
 Widget _buildButton(BuildContext context) {
@@ -42,6 +41,8 @@ class _CarWidgetState extends State<CarWidget> {
   bool pressedDetails = false;
   bool pressedExtras = false;
   bool pressedFeatures = false;
+//  bool pressedFeatures = false;
+
   var colorPurple = HexColor('#303F9F');
 
   @override
@@ -57,21 +58,23 @@ class _CarWidgetState extends State<CarWidget> {
               new BoxShadow(
                 color: Colors.grey,
                 blurRadius: 5,
-
               ),
             ]),
             child: Card(
               elevation: 5,
               child: Column(
                 children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        widget.car.carName,
-                        style: TextStyle(fontSize: 25),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top:4.0,bottom: 4.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          widget.car.carName,
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ],
+                    ),
                   ),
                   Container(
                       child: Image.network(
@@ -99,6 +102,8 @@ class _CarWidgetState extends State<CarWidget> {
                         onPressed: () {
                           setState(() {
                             pressedDetails = !pressedDetails;
+                            pressedFeatures=false;
+                            pressedExtras=false;
                           });
                         },
                       ),
@@ -115,9 +120,11 @@ class _CarWidgetState extends State<CarWidget> {
                         ),
                         Expanded(
                             child: FlatButton(
-
                                 color: Colors.white,
-                                onPressed: () {},
+                                onPressed: () {setState(() {
+                                  pressedExtras=false;
+                                  pressedFeatures=!pressedFeatures;
+                                });},
                                 child: Text(
                                   'FEATURES',
                                 ),
@@ -132,7 +139,10 @@ class _CarWidgetState extends State<CarWidget> {
                         Expanded(
                             child: FlatButton(
                           color: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {setState(() {
+                            pressedFeatures=false;
+                            pressedExtras=!pressedExtras;
+                          });},
                           child: Text(
                             'EXTRAS',
                           ),
@@ -142,10 +152,21 @@ class _CarWidgetState extends State<CarWidget> {
                         Container(
                           width: 10,
                         ),
-//                      FlatButton(onPressed: () {}, child: Text('EXTRAS', ),shape: Border(bottom: BorderSide(color: Colors.blueAccent,width: 2)),),
                       ],
                     ),
                   ),
+                  Visibility(visible: pressedFeatures, child: Container(
+                    child: Column(
+                      children: <Widget>[Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: <Widget>[Text(' Lore = ${widget.car.lore}')],), Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: <Widget>[Text('Transmission =   ${widget.car.transmission}')],)],
+                    ),
+
+                  )),
+                  Visibility(
+                    visible: pressedExtras,
+                    child: Column(children: <Widget>[
+                      Row(mainAxisAlignment:MainAxisAlignment.spaceEvenly,children: <Widget>[Text('No extras')],)
+                    ],),
+                  )
 //                Padding(
 //                  padding: const EdgeInsets.only(left:8.0,right: 8.0),
 //                  child: SizedBox(

@@ -35,8 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   var visibleSearch=true;
   @override
   Widget build(BuildContext context) {
-
-
     AppBar appBar1 = AppBar(
       elevation: 12,
       backgroundColor: Colors.lightBlueAccent,
@@ -117,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            visibleSearch = !visibleSearch;
+//            visibleSearch = !visibleSearch;
           });
         },
         tooltip: 'Search',
